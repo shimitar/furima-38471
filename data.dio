@@ -50,7 +50,7 @@
                         <mxGeometry y="264" width="140" height="34" as="geometry"/>
                     </mxCell>
                 </object>
-                <object label="birthday_id" id="63">
+                <object label="birthday" id="63">
                     <mxCell style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="2">
                         <mxGeometry y="298" width="140" height="34" as="geometry"/>
                     </mxCell>

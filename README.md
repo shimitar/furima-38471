@@ -13,7 +13,7 @@
 | kanji_firstname    | string | null: false             |
 | katakana_lastname  | string | null: false             |
 | katakana_firstname | string | null: false             |
-| birthday_id        | date   | null: false             | 
+| birthday           | date   | null: false             | 
 
 ### Association
 - has_many :items
