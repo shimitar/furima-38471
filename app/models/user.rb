@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
         with_options presence: true, format: { with: /[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+/} do
           validates :katakana_lastname 
-          validates :katakana_firstnamet
+          validates :katakana_firstname
         end
 
         PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/.freeze
