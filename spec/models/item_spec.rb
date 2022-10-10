@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
         @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
-      end     
+      end
       it 'ユーザーが紐付いていなければ登録できない' do
         @item.user = nil
         @item.valid?
@@ -37,43 +37,43 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it'価格に半角数字以外が含まれている場合は出品できない' do
+      it '価格に半角数字以外が含まれている場合は出品できない' do
         @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it '価格が300円未満では出品できない' do
         @item.price = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '価格が9_999_999円を超えると出品できない' do
         @item.price = '999999999999'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '商品のカテゴリーが空では登録できない' do
-        @item.category_id  = 1
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it '商品の状態が空では登録できない' do
-        @item.condition_id  = 1
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it '配送料の負担が空では登録できない' do
-        @item.delivery_charge_id  = 1
+        @item.delivery_charge_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
       end
       it '発送元の地域が空では登録できない' do
-        @item.sender_id  = 1
+        @item.sender_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Sender can't be blank")
       end
       it '発送までの日数が空では登録できない' do
-        @item.number_day_id  = 1
+        @item.number_day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Number day can't be blank")
       end
