@@ -1,0 +1,3 @@
+class BuyPlace
+
+end
