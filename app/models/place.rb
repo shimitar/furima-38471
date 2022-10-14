@@ -1,3 +1,4 @@
 class Place < ApplicationRecord
-   belongs_to :buy
+  attr_accessor :token 
+  belongs_to :buy
 end
