@@ -1,7 +1,7 @@
 class BuysController < ApplicationController
   before_action :set_item
   before_action :authenticate_user!
-
+  before_action :contributor_confirmation, only: :index
   def index
     @buy_place = BuyPlace.new
   end
@@ -35,4 +35,10 @@ class BuysController < ApplicationController
       currency: 'jpy'
     )
   end
-end
+
+  def contributor_confirmation
+    if current_user == @item.user || @item.buy.present?
+    redirect_to root_path
+    end
+  end
+ end

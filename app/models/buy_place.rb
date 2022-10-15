@@ -9,7 +9,8 @@ class BuyPlace
     validates :sender_id, numericality: {other_than: 1, message: "can't be blank"}
     validates :street
     validates :address
-    validates :phone, format: {with: /\A\d[0-9]{10,11}\z/}
+    validates :phone, format: {with: /\A[0-9]{10,11}\z/}
+    validates :token
   end
   def save
     buy = Buy.create(item_id: item_id, user_id: user_id,token: token)
