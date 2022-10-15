@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe BuyPlace, type: :model do
   describe '購入情報の保存' do
     before do
-    @buy_place = FactoryBot.build(:buy_place)
+      user = FactoryBot.create(:user)
+      item = FactoryBot.create(:item)
+      @buy_place = FactoryBot.build(:buy_place, item_id: item.id, user_id: user.id)
+      sleep(1)
     end
 
     context '内容に問題ない場合' do
@@ -48,30 +51,35 @@ RSpec.describe BuyPlace, type: :model do
         expect(@buy_place.errors.full_messages).to include("Phone can't be blank")
       end
       it '電話番号が9桁では保存できない' do
-        @buy_place.phone = "090123456"
+        @buy_place.phone = '090123456'
         @buy_place.valid?
-        expect(@buy_place.errors.full_messages).to include("Phone is invalid")
+        expect(@buy_place.errors.full_messages).to include('Phone is invalid')
       end
       it '電話番号が12桁では保存できない' do
-        @buy_place.phone = "090123456789"
+        @buy_place.phone = '090123456789'
         @buy_place.valid?
-        expect(@buy_place.errors.full_messages).to include("Phone is invalid")
+        expect(@buy_place.errors.full_messages).to include('Phone is invalid')
       end
       it '電話番号が全角数字では保存できない' do
-        @buy_place.phone = "０９０１２３４５６７"
+        @buy_place.phone = '０９０１２３４５６７'
         @buy_place.valid?
-        expect(@buy_place.errors.full_messages).to include("Phone is invalid")
+        expect(@buy_place.errors.full_messages).to include('Phone is invalid')
       end
       it '商品が紐付いていないと保存できないこと' do
         @buy_place.item_id = nil
         @buy_place.valid?
         expect(@buy_place.errors.full_messages).to include("Item can't be blank")
       end
-        it "tokenが空では保存できない" do
-          @buy_place.token = nil
-          @buy_place.valid?
-          expect(@buy_place.errors.full_messages).to include("Token can't be blank")
-        end
+      it 'userが紐付いていないと保存できない' do
+        @buy_place.user_id = nil
+        @buy_place.valid?
+        expect(@buy_place.errors.full_messages).to include("User can't be blank")
+      end
+      it 'tokenが空では保存できない' do
+        @buy_place.token = nil
+        @buy_place.valid?
+        expect(@buy_place.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
+end

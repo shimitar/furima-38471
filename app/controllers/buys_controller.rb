@@ -24,11 +24,13 @@ class BuysController < ApplicationController
   end
 
   def buy_params
-    params.require(:buy_place).permit(:post_code, :sender_id, :street, :address, :building_name, :phone).merge( item_id: params[:item_id], user_id: current_user.id,token: params[:token])
+    params.require(:buy_place).permit(:post_code, :sender_id, :street, :address, :building_name, :phone).merge(
+      item_id: params[:item_id], user_id: current_user.id, token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: buy_params[:token],
@@ -37,8 +39,6 @@ class BuysController < ApplicationController
   end
 
   def contributor_confirmation
-    if current_user == @item.user || @item.buy.present?
-    redirect_to root_path
-    end
+    redirect_to root_path if current_user == @item.user || @item.buy.present?
   end
- end
+end
