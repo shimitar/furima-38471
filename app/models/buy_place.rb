@@ -5,8 +5,8 @@ class BuyPlace
   with_options presence: true do
     validates :item_id
     validates :user_id
-    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
-    validates :sender_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/}
+    validates :sender_id, numericality: { other_than: 1, message: 'を入力してください'}
     validates :street
     validates :address
     validates :phone, format: { with: /\A[0-9]{10,11}\z/ }
